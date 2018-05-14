@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "Products";
+}
+
+<h2>Products</h2>
+
+<table class="table" id="productTable">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Price</th>
+            <th scope="col">Category</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td></td>
+    </tbody>
+</table>
+
+@section scripts {
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+    <!-- DataTable css-->
+}
+@section tablestyle {
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    }
+
+@section ajaxcall {
+    <script>
+        $(function () {
+            var dataTable = $('#productTable').DataTable({
+                //configuration settings for the table
+                "ajax": {
+                    "url": "/api/productapi/getproducts",
+                    "type": "GET",
+                    "dataType": "json",
+                    "dataSrc": "" //render as array not json
+                },
+                "columns":
+                    [
+                        { "data": "Id" },
+                        { "data": "Name" },
+                        { "data": "Description" },
+                        { "data": "Price" },
+                        { "data": "Category.Name" },
+
+                    ],
+
+                "language": {
+                    "emptyTable": "Table is empty"
+                }
+            });
+        });
+    </script>
+}
